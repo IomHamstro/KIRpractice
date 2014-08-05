@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <title>GuestBook</title>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/resources/css/message.css" rel="stylesheet"/>
+    <script src="/resources/js/jquery-2.1.0.min.js"></script>
+    <script src="/resources/js/jquery-ui-1.10.4.custom.js"></script>
+    <link href="/resources/css/jquery-ui-1.10.4.custom.css" rel="stylesheet"/>
+    <script type="text/javascript" th:inline="text">
+        $(function () {
+
+            $('#myForm').bind('submit', function (event) {
+
+                $('[type=text]').each(function () {
+
+                    if (!$(this).val().length) {
+
+                        event.preventDefault();
+
+                        $(this).css('border', '2px solid #13109d');
+
+                    }
+
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <h3 class="title">Гостевая книга</h3>
+    <a href="/messages"  class="add">Список сообщений</a>
+
+    <div class="jumbotron" style="padding: 10px 30px 20px">
+        <div class="row">
+            <form action="#" th:action="@{/message/save}"  th:object="${message}" method="post" class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Заголовок</label>
+                    <div class="col-lg-10"><input type="text" id = "author"  th:field="*{author.name}" data-required="true"/></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Текст</label>
+                    <div class="col-lg-10"><textarea id="text"  th:field="*{text}"></textarea></div>
+                </div>
+                <button class="add" type="submit" id="submit" >Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

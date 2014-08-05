@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>GuestBook</title>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/resources/css/message.css" rel="stylesheet"/>
+    <script src="/resources/js/jquery-2.1.0.min.js"></script>
+    <script src="/resources/js/jquery-ui-1.10.4.custom.js"></script>
+    <link href="/resources/css/jquery-ui-1.10.4.custom.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <h3 class="title">Гостевая книга</h3>
+
+    <a href="/new-message" class="add">Добавить сообщение</a>
+    <div class="row block_messages">
+        <div class="row one_message" th:each="m : ${allMessages}">
+            <div class="col-lg-12 col-md-12 col-xs-12 head">
+                <div class="col-lg-3 col-md-3 col-xs-3 ">
+                    <p th:text="${m.author.name}">Author</p>
+                </div>
+                <div class="col-lg-offset-10 col- col-md-offset-10 col-xs-offset-10">
+                    <p th:text="${m.date} ? ${#calendars.format(m.date, 'dd/MMM/yyyy HH:mm')}">Date</p>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-xs-12 text">
+                <p th:text="${m.text}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
